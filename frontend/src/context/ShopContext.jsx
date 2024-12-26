@@ -9,11 +9,12 @@ const ShopContextProvider = (props) => {
 
     const currency = '$';
     const delivery_fee = 10;
-    const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:4000';
+    const backendUrl = process.env.REACT_APP_BACKEND_URL;
     const [search,setSearch] = useState('');
     const [showSearch, setShowSearch] = useState(false)
     const [cartItems,setCartItems] =useState({});
     const [products, setProducts] = useState([])
+    const [token, setToken] = useState('');
     const navigate = useNavigate();
 
     const addToCart = async (itemId,size)=>{
@@ -97,13 +98,20 @@ const ShopContextProvider = (props) => {
         getProductsData();
     },[])
 
+    useEffect(()=>{
+        if(!token && localStorage.getItem('token')){
+            setToken(localStorage.getItem('token'));
+        }
+    },[])
+
     const value = {
         products , currency, delivery_fee,
         search, setSearch, showSearch, setShowSearch,
-        cartItems,addToCart, 
+        cartItems, setCartItems,addToCart, 
         getCartCount, updateQuantity,
         getCartAmount, navigate,
-        backendUrl
+        backendUrl,
+        setToken, token
     }
     return (
         <ShopContext.Provider value={value}>
