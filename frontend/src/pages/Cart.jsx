@@ -10,6 +10,8 @@ const Cart = () => {
 
   const [cartData, setCartData] = useState([]);
 
+  console.log(cartData);
+  
   useEffect(()=>{
     if(products.length>0){
       const tempData = [];
