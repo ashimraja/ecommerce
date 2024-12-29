@@ -8,7 +8,7 @@ const orderRouter = express.Router()
 
 //admin fetures
 orderRouter.post('/list', adminAuth, allOrders);
-orderRouter.put('/status', adminAuth, updateStatus);
+orderRouter.post('/status', adminAuth, updateStatus);
 
 //paymet features
 orderRouter.post('/place', authUser, placeOrder);
